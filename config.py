@@ -6,5 +6,6 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Telegram Bot Config (we'll fill these later)
-    TELEGRAM_BOT_TOKEN = '8598712050:AAFj_7GaoUPeV1ZrYo3QrEooCfOtnLndxmo'
+    import os
+    TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
     TELEGRAM_CHAT_ID = '8444949634'
