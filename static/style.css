@@ -1,11 +1,13 @@
-/* ========= Global Layout ========= */
+/* ========= GLOBAL LAYOUT ========= */
 body {
   background: linear-gradient(135deg, #eef2f3, #d9e7ff);
   font-family: "Poppins", sans-serif;
   color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-/* ========= Cards ========= */
+/* ========= CARD STYLING ========= */
 .card {
   border: none;
   border-radius: 1rem;
@@ -19,18 +21,57 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* ---------- REGISTER PAGE STYLING ---------- */
-
-body {
-  background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-  color: #333;
+/* ========= BUTTONS ========= */
+.btn-primary, .btn-success {
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
 }
 
+.btn-primary {
+  background: #007bff;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+  transform: scale(1.03);
+}
+
+.btn-success {
+  background: #198754;
+}
+
+.btn-success:hover {
+  background: #157347;
+  transform: scale(1.03);
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: #fff;
+  border-radius: 8px;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-cancel:hover {
+  background-color: #5a6268;
+  transform: scale(1.03);
+}
+
+/* ========= HEADINGS ========= */
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+  color: #222;
+}
+
+/* ========= ALERTS ========= */
+.alert {
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* ========= REGISTER / LOGIN ========= */
 .register-container {
   background: #fff;
   padding: 40px 35px;
@@ -40,6 +81,7 @@ body {
   max-width: 450px;
   text-align: center;
   animation: fadeIn 0.5s ease-in-out;
+  margin: auto;
 }
 
 .register-container h2 {
@@ -71,9 +113,9 @@ body {
 }
 
 .register-container input:focus {
-  border-color: #0d6efd;
+  border-color: #198754;
   outline: none;
-  box-shadow: 0 0 4px rgba(13, 110, 253, 0.4);
+  box-shadow: 0 0 4px rgba(25, 135, 84, 0.4);
 }
 
 .register-container .btn-primary {
@@ -82,20 +124,13 @@ body {
   border-radius: 8px;
   font-weight: 500;
   background-color: #198754;
-  border: none;
-  transition: all 0.3s ease-in-out;
-}
-
-.register-container .btn-primary:hover {
-  background-color: #157347;
-  transform: scale(1.03);
 }
 
 .register-container a {
   display: block;
   margin-top: 15px;
   text-decoration: none;
-  color: #0d6efd;
+  color: #007bff;
   font-weight: 500;
   transition: 0.2s;
 }
@@ -104,65 +139,6 @@ body {
   text-decoration: underline;
 }
 
-/* Small fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-/* ========= Buttons ========= */
-.btn-primary {
-  background: #007bff;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: 0.2s ease-in-out;
-}
-
-.btn-primary:hover {
-  background: #0056b3;
-  transform: scale(1.03);
-}
-
-.btn-success {
-  background: #28a745;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: 0.2s ease-in-out;
-}
-
-.btn-success:hover {
-  background: #1e7e34;
-  transform: scale(1.03);
-}
-
-/* ========= Headings ========= */
-h3, h1, h2 {
-  font-weight: 700;
-  color: #222;
-}
-
-/* ========= Alerts ========= */
-.alert {
-  border-radius: 10px;
-  font-weight: 500;
-}
-
-/* ========= Centering Helper ========= */
-.vh-100 {
-  height: 100vh !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 /* ========= ADD TASK PAGE ========= */
 .add-task-container {
   max-width: 600px;
@@ -212,29 +188,7 @@ h3, h1, h2 {
   box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
 }
 
-.add-task-container button {
-  margin-top: 20px;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 18px;
-  font-size: 16px;
-  font-weight: 600;
-  transition: 0.2s ease-in-out;
-}
-
-.add-task-container button:hover {
-  transform: scale(1.03);
-  min-width: 130px;
-}
-
-.btn-cancel {
-  background-color: #6c757d;
-  color: #fff;
-}
-
-.btn-cancel:hover {
-  background-color: #5a6268;
-}
+/* ========= TASK CARDS ========= */
 .task-card {
   position: relative;
   border-radius: 10px;
@@ -266,21 +220,23 @@ h3, h1, h2 {
   color: #fff !important;
 }
 
-/* ========= Mobile Responsive Design ========= */
+/* ========= TELEGRAM LINK PAGE ========= */
+.card.text-center h3 {
+  color: #198754;
+}
+
+/* ========= MOBILE RESPONSIVE DESIGN ========= */
 @media (max-width: 768px) {
 
-  /* General container spacing */
   .container {
     padding: 15px;
   }
 
-  /* Center and resize heading */
   h2 {
     font-size: 1.4rem;
     text-align: center;
   }
 
-  /* Top bar buttons (Delete + Logout) stack neatly */
   .d-flex.gap-2 {
     flex-direction: column;
     align-items: center;
@@ -298,7 +254,6 @@ h3, h1, h2 {
     font-size: 0.95rem;
   }
 
-  /* Telegram alert and “Add Task” button spacing */
   .alert {
     font-size: 0.9rem;
     text-align: center;
@@ -310,13 +265,11 @@ h3, h1, h2 {
     margin-top: 15px;
   }
 
-  /* Task cards full width */
   .task-card {
     width: 100%;
     margin-bottom: 15px;
   }
 
-  /* Task text resizing */
   .task-card h5 {
     font-size: 1.1rem;
   }
@@ -324,4 +277,15 @@ h3, h1, h2 {
   .task-card p {
     font-size: 0.9rem;
   }
+
+  .add-task-container {
+    margin: 30px 15px;
+    padding: 25px;
+  }
+}
+
+/* ========= ANIMATIONS ========= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

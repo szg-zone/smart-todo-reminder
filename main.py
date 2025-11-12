@@ -1,30 +1,46 @@
 # main.py
-from dotenv import load_dotenv
-load_dotenv()
-
 import multiprocessing
 import time
+from dotenv import load_dotenv
 
-from app import app            # your Flask app
-from bot_handler import bot_app  # your telegram Application (bot)
-import scheduler                # your scheduler module (must contain run_scheduler())
+# Load environment variables from .env file
+load_dotenv()
 
+# Import components
+from app import app            # Flask web application
+from bot_handler import bot_app  # Telegram bot application
+import scheduler                # Reminder scheduler module
+
+# ----------------------------
+# Run Flask App
+# ----------------------------
 def run_flask():
-    # run flask dev server; disable reloader to avoid double-start
-    app.run(debug=True, use_reloader=False)
+    print("🌐 Flask web server starting...")
+    app.run(host="0.0.0.0", port=5000, debug=True, use_reloader=False)
 
+
+# ----------------------------
+# Run Telegram Bot
+# ----------------------------
 def run_bot():
     print("🤖 Telegram bot is running...")
-    # run_polling is blocking, run in its own process
     bot_app.run_polling()
 
-def run_scheduler():
-    print("🕒 Scheduler started...")
-    # Ideally scheduler provides a blocking function to start loop
-    scheduler.run_loop_forever()  # we'll create this in scheduler.py
 
+# ----------------------------
+# Run Scheduler
+# ----------------------------
+def run_scheduler():
+    print("🕒 Scheduler started (checks tasks every 60 seconds)...")
+    scheduler.run_loop_forever()
+
+
+# ----------------------------
+# Entry Point
+# ----------------------------
 if __name__ == "__main__":
     processes = []
+
     for target in (run_flask, run_bot, run_scheduler):
         p = multiprocessing.Process(target=target)
         p.start()
@@ -34,7 +50,7 @@ if __name__ == "__main__":
         for p in processes:
             p.join()
     except KeyboardInterrupt:
-        print("Shutting down...")
+        print("🛑 Shutting down all processes...")
         for p in processes:
             p.terminate()
         for p in processes:

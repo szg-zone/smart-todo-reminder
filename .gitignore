@@ -1,8 +1,25 @@
+# --- Python Virtual Environment ---
 venv/
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Databases ---
 *.db
 *.sqlite3
 instance/
+
+# --- Environment Variables & Secrets ---
 .env
+.env.local
+.env.*
+
+# --- IDE & OS Files ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Flask Config (if contains secrets) ---
 config.py
-.env

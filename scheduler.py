@@ -2,22 +2,36 @@ import time
 import asyncio
 from datetime import datetime, timedelta
 from flask import Flask
-from config import Config
 from models import db, Task, User
 from telegram import Bot
+import os
 
-# Initialize Flask + DB
+# ---------------------------
+# 1️⃣ Load token from environment
+# ---------------------------
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+if not BOT_TOKEN:
+    raise ValueError("❌ Missing TELEGRAM_BOT_TOKEN in environment")
+
+# ---------------------------
+# 2️⃣ Flask app + DB
+# ---------------------------
 app = Flask(__name__)
-app.config.from_object(Config)
+app.config.from_object("config.Config")
 db.init_app(app)
 
-# Telegram Bot setup
-bot = Bot(token=Config.TELEGRAM_BOT_TOKEN)
+# ---------------------------
+# 3️⃣ Telegram bot
+# ---------------------------
+bot = Bot(token=BOT_TOKEN)
 
+# ---------------------------
+# 4️⃣ Send message function
+# ---------------------------
 async def send_telegram_message(chat_id, message):
-    """Send a Telegram message in its own event loop (safe & reliable)."""
+    """Send a Telegram message asynchronously (safe for each loop)."""
     try:
-        # Each send gets a fresh loop to avoid 'Event loop closed' issues
+        # Create and use a fresh event loop per message
         new_loop = asyncio.new_event_loop()
         asyncio.set_event_loop(new_loop)
         await bot.send_message(chat_id=chat_id, text=message, parse_mode='Markdown')
@@ -30,6 +44,9 @@ async def send_telegram_message(chat_id, message):
         except:
             pass
 
+# ---------------------------
+# 5️⃣ Reminder checker
+# ---------------------------
 def check_and_send_reminders():
     """Check all users' tasks and send Telegram reminders if due."""
     with app.app_context():
@@ -42,16 +59,15 @@ def check_and_send_reminders():
                 if not user or not user.telegram_chat_id:
                     continue
 
-                # Build datetime for task
+                # Construct datetime
                 if task.time:
                     task_datetime = datetime.strptime(f"{task.date} {task.time}", "%Y-%m-%d %H:%M")
                 else:
                     task_datetime = datetime.strptime(task.date, "%Y-%m-%d")
 
-                # Send reminder 5 minutes before (you can change this)
                 remind_time = task_datetime - timedelta(minutes=5)
 
-                # If we’re within 5 minutes before or at task time
+                # Within reminder window
                 if remind_time <= now <= task_datetime + timedelta(minutes=1):
                     message = (
                         f"🔔 *Reminder for {user.username}*\n\n"
@@ -61,10 +77,9 @@ def check_and_send_reminders():
                         f"💬 {task.description or 'No details provided.'}"
                     )
 
-                    # ✅ Run in isolated loop
+                    # Send message
                     asyncio.run(send_telegram_message(user.telegram_chat_id, message))
 
-                    # Mark as notified
                     task.notified = True
                     db.session.commit()
                     print(f"✅ Reminder sent for task '{task.title}'")
@@ -72,6 +87,9 @@ def check_and_send_reminders():
             except Exception as e:
                 print(f"⚠️ Error checking task '{task.title}': {e}")
 
+# ---------------------------
+# 6️⃣ Loop runner (called from main.py)
+# ---------------------------
 def run_loop_forever():
     print("🚀 Scheduler run loop starting...")
     while True:

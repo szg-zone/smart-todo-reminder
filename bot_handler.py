@@ -1,21 +1,37 @@
+# bot_handler.py
+import os
 from telegram import Update
-from telegram.ext import Application, CommandHandler, ContextTypes
-from config import Config
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from models import db, User
 from flask import Flask
 
-# Initialize Flask app context for database access
+# ---------------------------
+# 1️⃣ Load Flask app context for DB access
+# ---------------------------
 flask_app = Flask(__name__)
-flask_app.config.from_object(Config)
+flask_app.config.from_object("config.Config")
 db.init_app(flask_app)
 
-# Initialize Telegram Bot application
-bot_app = Application.builder().token(Config.TELEGRAM_BOT_TOKEN).build()
+# ---------------------------
+# 2️⃣ Load Telegram token from environment
+# ---------------------------
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-# ----------- START COMMAND HANDLER -----------
+if not BOT_TOKEN:
+    raise ValueError("❌ Missing TELEGRAM_BOT_TOKEN in environment")
+
+# ---------------------------
+# 3️⃣ Build Telegram Application
+# ---------------------------
+bot_app = ApplicationBuilder().token(BOT_TOKEN).build()
+
+
+# ---------------------------
+# 4️⃣ Command handler: /start
+# ---------------------------
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handles /start command with user ID (payload)."""
-    if context.args:  # Means there's a user ID after /start
+    if context.args:  # /start <user_id>
         user_id = context.args[0]
         chat_id = update.effective_chat.id
 
@@ -34,10 +50,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("👋 Hello! Please use the link from the website to link your account.")
 
-# Add command handler
+
+# ---------------------------
+# 5️⃣ Add command handler to bot
+# ---------------------------
 bot_app.add_handler(CommandHandler("start", start))
 
-# ----------- RUN THE BOT -----------
+
+# ---------------------------
+# 6️⃣ Run bot directly (for testing only)
+# ---------------------------
 if __name__ == "__main__":
     print("🤖 Telegram bot is running... (Press CTRL+C to stop)")
     bot_app.run_polling()
