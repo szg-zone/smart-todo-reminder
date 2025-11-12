@@ -1,0 +1,327 @@
+/* ========= Global Layout ========= */
+body {
+  background: linear-gradient(135deg, #eef2f3, #d9e7ff);
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+/* ========= Cards ========= */
+.card {
+  border: none;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- REGISTER PAGE STYLING ---------- */
+
+body {
+  background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.register-container {
+  background: #fff;
+  padding: 40px 35px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.register-container h2 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #212529;
+}
+
+.register-container p {
+  color: #6c757d;
+  margin-bottom: 25px;
+}
+
+.register-container form label {
+  text-align: left;
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #495057;
+}
+
+.register-container input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.register-container input:focus {
+  border-color: #0d6efd;
+  outline: none;
+  box-shadow: 0 0 4px rgba(13, 110, 253, 0.4);
+}
+
+.register-container .btn-primary {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 500;
+  background-color: #198754;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.register-container .btn-primary:hover {
+  background-color: #157347;
+  transform: scale(1.03);
+}
+
+.register-container a {
+  display: block;
+  margin-top: 15px;
+  text-decoration: none;
+  color: #0d6efd;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.register-container a:hover {
+  text-decoration: underline;
+}
+
+/* Small fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ========= Buttons ========= */
+.btn-primary {
+  background: #007bff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+  transform: scale(1.03);
+}
+
+.btn-success {
+  background: #28a745;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-success:hover {
+  background: #1e7e34;
+  transform: scale(1.03);
+}
+
+/* ========= Headings ========= */
+h3, h1, h2 {
+  font-weight: 700;
+  color: #222;
+}
+
+/* ========= Alerts ========= */
+.alert {
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* ========= Centering Helper ========= */
+.vh-100 {
+  height: 100vh !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* ========= ADD TASK PAGE ========= */
+.add-task-container {
+  max-width: 600px;
+  margin: 60px auto;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+
+.add-task-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.add-task-container h3 {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.add-task-container label {
+  font-weight: 600;
+  color: #444;
+  text-align: left;
+  display: block;
+  margin-top: 15px;
+}
+
+.add-task-container input,
+.add-task-container textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+}
+
+.add-task-container input:focus,
+.add-task-container textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+}
+
+.add-task-container button {
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.2s ease-in-out;
+}
+
+.add-task-container button:hover {
+  transform: scale(1.03);
+  min-width: 130px;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn-cancel:hover {
+  background-color: #5a6268;
+}
+.task-card {
+  position: relative;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #dc3545;
+  color: #fff !important;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 4px 10px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+  background: #b02a37;
+  transform: scale(1.03);
+  color: #fff !important;
+}
+
+/* ========= Mobile Responsive Design ========= */
+@media (max-width: 768px) {
+
+  /* General container spacing */
+  .container {
+    padding: 15px;
+  }
+
+  /* Center and resize heading */
+  h2 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  /* Top bar buttons (Delete + Logout) stack neatly */
+  .d-flex.gap-2 {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .d-flex.gap-2 form,
+  .d-flex.gap-2 a {
+    width: 100%;
+  }
+
+  .d-flex.gap-2 button,
+  .d-flex.gap-2 .btn {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  /* Telegram alert and “Add Task” button spacing */
+  .alert {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .btn-success {
+    width: 100%;
+    font-size: 1rem;
+    margin-top: 15px;
+  }
+
+  /* Task cards full width */
+  .task-card {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  /* Task text resizing */
+  .task-card h5 {
+    font-size: 1.1rem;
+  }
+
+  .task-card p {
+    font-size: 0.9rem;
+  }
+}
